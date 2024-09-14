@@ -1,10 +1,18 @@
 import AppsIcon from "@mui/icons-material/Apps";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../redux/store";
-import { toggleMenu } from "../redux/menu/slice";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../redux/store";
+import { getRandomQuotesHandler, toggleMenu } from "../redux/menu/slice";
+import { useEffect } from "react";
 
 const BaseNavbar = () => {
+  const state = useSelector((state: RootState) => state.menu.randomQuotes);
   const dispatch = useDispatch<AppDispatch>();
+  useEffect(() => {
+    console.log("random useefect");
+    dispatch(getRandomQuotesHandler());
+  }, []);
+
+  console.log(state);
   return (
     <div id="nav-bar">
       <input
@@ -83,10 +91,7 @@ const BaseNavbar = () => {
           </label>
         </div>
         <div id="nav-footer-content">
-          <p>
-            ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua.
-          </p>
+          {state?.writer} : <p>{state?.description}</p>
         </div>
       </div>
     </div>
