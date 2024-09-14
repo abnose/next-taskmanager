@@ -1,9 +1,20 @@
 import AppsIcon from "@mui/icons-material/Apps";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../redux/store";
+import { toggleMenu } from "../redux/menu/slice";
 
 const BaseNavbar = () => {
+  const dispatch = useDispatch<AppDispatch>();
   return (
     <div id="nav-bar">
-      <input id="nav-toggle" type="checkbox" />
+      <input
+        onClick={(e) => {
+          dispatch(toggleMenu("payload test"));
+          console.log("test", e.target);
+        }}
+        id="nav-toggle"
+        type="checkbox"
+      />
       <div id="nav-header">
         <label for="nav-toggle">
           <span id="nav-toggle-burger"></span>
@@ -11,6 +22,7 @@ const BaseNavbar = () => {
         <a id="nav-title" href="https://codepen.io" target="_blank">
           C<i className="fab fa-codepen"></i>DEPEN
         </a>
+
         <hr />
       </div>
       <div id="nav-content">

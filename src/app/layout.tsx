@@ -11,6 +11,8 @@ import rtlPlugin from "stylis-plugin-rtl";
 import { prefixer } from "stylis";
 import BaseNavbar from "./components/BaseNavbar";
 import { Box, Container } from "@mui/material";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
 const BYekan = localFont({
   src: "./assets/fonts/BYekan/BYekan.ttf",
   variable: "--BYekan",
@@ -34,16 +36,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <CacheProvider value={cacheRtl}>
-        <BaseNavbar />
-        <Container fixed>
-          {/* <Box sx={{ bgcolor: "#cfe8fc", height: "100vh" }}> */}
+      <Provider store={store}>
+        <CacheProvider value={cacheRtl}>
+          <BaseNavbar />
           <body className={`${BYekan.variable}`}>
-            <ThemeProvider theme={theme}>{children}</ThemeProvider>
+            <Box sx={{ bgcolor: "#cfe8fc", height: "100vh" }}>
+              <ThemeProvider theme={theme}>{children}</ThemeProvider>
+            </Box>
           </body>
-          {/* </Box> */}
-        </Container>
-      </CacheProvider>
+        </CacheProvider>
+      </Provider>
     </html>
   );
 }

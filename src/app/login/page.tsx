@@ -13,6 +13,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { IHeader } from "@/app/components/BaseTable";
 import CreateIcon from "@mui/icons-material/Create";
+import BasePage from "../components/BasePage";
 const Login = () => {
   const [filterdItems, setFilterdItems] = useState({});
   const defaultValues = {
@@ -236,42 +237,42 @@ const Login = () => {
     },
     {
       order: 1,
-      desc: "dont have yyyyy",
+      desc: "dont have yyyyy787777777777777",
       deadline: "dfsa",
       status: "sdfa",
       amount: 4,
     },
     {
       order: 1,
-      desc: "dont have yyyyy",
+      desc: "dont have yyyyy99999999999999",
       deadline: "dfsa",
       status: "sdfa",
       amount: 4,
     },
     {
       order: 1,
-      desc: "dont have yyyyy",
+      desc: "dont have yyyy88888888888888y",
       deadline: "dfsa",
       status: "sdfa",
       amount: 4,
     },
     {
       order: 1,
-      desc: "dont have yyyyy",
+      desc: "dont have yyyyy777777777777",
       deadline: "dfsa",
       status: "sdfa",
       amount: 4,
     },
     {
       order: 1,
-      desc: "dont have yyyyy",
+      desc: "dont have yyyyy66666666666666",
       deadline: "dfsa",
       status: "sdfa",
       amount: 4,
     },
     {
       order: 1,
-      desc: "dont have yyyyy",
+      desc: "dont have yyyyy 555555555",
       deadline: "dfsa",
       status: "sdfa",
       amount: 5,
@@ -440,12 +441,10 @@ const Login = () => {
 
   return (
     <>
-      <Box
-        sx={{
-          width: "95%",
-          padding: "25px",
-          marginLeft: "100px",
-        }}
+      <BasePage
+      // className="w-[90%] h-[95vh] shadow-md rounded-lg p-5 overflow-hidden absolute top-[50%] left-[50%] translate-x-[-53%] translate-y-[-50%]"
+      // // className="w-[78%] h-[95vh] shadow-md rounded-lg p-5 overflow-hidden absolute top-[50%] left-[50%] translate-x-[-62%] translate-y-[-50%]"
+      // sx={{ backgroundColor: "rgb(240, 245, 255)" }}
       >
         <BaseTable
           header={header}
@@ -459,7 +458,7 @@ const Login = () => {
           onSearch={handleSearch}
           filterdItem={filterdItems}
         />
-      </Box>
+      </BasePage>
       {/* <TextField
         id="outlined-helperText"
         label="Helper text"
