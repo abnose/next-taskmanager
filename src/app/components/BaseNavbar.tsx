@@ -6,6 +6,7 @@ import { useEffect } from "react";
 
 const BaseNavbar = () => {
   const state = useSelector((state: RootState) => state.menu.randomQuotes);
+  console.log(state);
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
     console.log("random useefect");
@@ -24,7 +25,7 @@ const BaseNavbar = () => {
         type="checkbox"
       />
       <div id="nav-header">
-        <label for="nav-toggle">
+        <label htmlFor="nav-toggle">
           <span id="nav-toggle-burger"></span>
         </label>
         <a id="nav-title" href="https://codepen.io" target="_blank">
@@ -86,12 +87,13 @@ const BaseNavbar = () => {
             </a>
             <span id="nav-footer-subtitle">ادمین</span>
           </div>
-          <label for="nav-footer-toggle">
+          <label htmlFor="nav-footer-toggle">
             <i className="fas fa-caret-up"></i>
           </label>
         </div>
-        <div id="nav-footer-content">
-          {state?.writer} : <p>{state?.description}</p>
+        <div style={{ direction: "ltr" }} id="nav-footer-content">
+          {state?.writer} :{" "}
+          <p dangerouslySetInnerHTML={{ __html: state?.description }}></p>
         </div>
       </div>
     </div>

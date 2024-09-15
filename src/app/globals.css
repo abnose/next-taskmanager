@@ -65,12 +65,25 @@ th {
 
 .emptyTable {
   position: absolute;
-  top: 0;
+  /* background: white; */
+  bottom: 0;
+  width: 100%;
+  height: 81%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loadingTable {
+  position: absolute;
+  /* background: white; */
+  bottom: 0;
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
 :root {
@@ -453,6 +466,13 @@ label[for="nav-footer-toggle"] {
 .customScroll::-webkit-scrollbar-button {
   height: 16px;
 }
+
+.MuiButton-startIcon {
+  display: inherit !important;
+  margin-left: -7px !important;
+  margin-right: 12px !important;
+}
+
 /* #nav-footer-content::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -461,3 +481,23 @@ label[for="nav-footer-toggle"] {
   border-radius: 99px;
   background-color: #d62929;
 } */
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 100px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+        farthest-side,
+        var(--navbar-dark-primary) 94%,
+        #0000
+      )
+      top/8px 8px no-repeat,
+    conic-gradient(#0000 30%, var(--navbar-dark-primary));
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0);
+  animation: l13 1s infinite linear;
+}
+@keyframes l13 {
+  100% {
+    transform: rotate(1turn);
+  }
+}

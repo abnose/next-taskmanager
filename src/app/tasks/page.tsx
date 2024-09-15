@@ -27,32 +27,16 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LoginIcon from "@mui/icons-material/Login";
-const Login = () => {
+const Tasks = () => {
   const [filterdItems, setFilterdItems] = useState({});
   const defaultValues = {
     order: "",
     desc: "",
-    password: "",
-    userName: "",
-  };
-  const [showPassword, setShowPassword] = useState(false);
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const handleMouseDownPassword = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    event.preventDefault();
-  };
-  const handleMouseUpPassword = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    event.preventDefault();
   };
 
   const loginSchema = yup.object({
     order: yup.string().notRequired(),
     desc: yup.string().notRequired(),
-    password: yup.string().required("الزامی است"),
-    userName: yup.string().required("الزامی است"),
   });
   const {
     handleSubmit,
@@ -378,6 +362,8 @@ const Login = () => {
     },
   ];
 
+  //   const data = [];
+
   const edit = (item) => {
     console.log(item);
   };
@@ -467,117 +453,35 @@ const Login = () => {
       desc: getValues("desc"),
     });
   };
-  const onSubmit = (data: any) => {
-    console.log(data);
-  };
+
+  const [loading, setLoading] = useState(true);
+
+  setTimeout(() => {
+    setLoading(false);
+  }, 2000);
+
   return (
     <>
       <BasePage>
         <>
-          <div className="absolute w-72 h-72 bg-gradient-to-br from-gray-500 to-gray-800 rounded-full top-[-50px] right-[300px] z-negative"></div>
-          <div className="absolute w-48 h-48 bg-gradient-to-br from-gray-400 to-gray-600 rounded-full bottom-[-50px] left-[300px] z-negative"></div>
-          <Box className="p-5 w-96 relative top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] h-[500px] bg-white/20 rounded-xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[5px] border border-white/30">
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <Box className="flex w-full justify-center items-center my-[1.5em]">
-                <AccountCircleIcon
-                  sx={{
-                    color: "#18283b",
-                    marginLeft: "auto",
-                    marginRight: "auto",
-                    fontSize: "175px",
-                  }}
-                />
-              </Box>
-              <Box className="grid max-sm:grid-cols-1 max-md:grid-cols-1 md:grid-cols-1 items-center justify-center w-full gap-2 ">
-                <CustomTextInput
-                  name="userName"
-                  label="ایمیل یا نام کاربری"
-                  control={control}
-                  errors={errors}
-                />
-                <Controller
-                  name="password"
-                  control={control}
-                  render={({ field }) => (
-                    <FormControl variant="outlined" error={!!errors.password}>
-                      <InputLabel htmlFor="outlined-adornment-password">
-                        رمز عبور
-                      </InputLabel>
-                      <OutlinedInput
-                        {...field}
-                        type={showPassword ? "text" : "password"}
-                        onChange={(e) => field.onChange(e.target.value)}
-                        startAdornment={
-                          <InputAdornment
-                            position="end"
-                            sx={{ marginRight: "10px" }}
-                          >
-                            <IconButton
-                              aria-label="toggle password visibility"
-                              onClick={handleClickShowPassword}
-                              onMouseDown={handleMouseDownPassword}
-                              onMouseUp={handleMouseUpPassword}
-                              edge="start"
-                              sx={{}}
-                            >
-                              {showPassword ? (
-                                <VisibilityOff />
-                              ) : (
-                                <Visibility />
-                              )}
-                            </IconButton>
-                          </InputAdornment>
-                        }
-                        label="Password"
-                      />
-                      {errors.password && (
-                        <Typography
-                          variant="caption"
-                          color="error"
-                          sx={{
-                            display: "flex",
-                            mt: "3px",
-                            ml: "14px",
-                            justifyContent: "left",
-                          }}
-                        >
-                          {errors.password?.message}
-                        </Typography>
-                      )}
-                    </FormControl>
-                  )}
-                />
-                <Box className="flex mt-4">
-                  <Box className="mr-auto">
-                    <Button
-                      variant="outlined"
-                      type="submit"
-                      startIcon={<LoginIcon />}
-                    >
-                      ورود
-                    </Button>
-                  </Box>
-                </Box>
-              </Box>
-            </form>
-          </Box>
+          <BaseTable
+            isLoading={loading}
+            header={header}
+            col={data}
+            pagination={true}
+            paginationType="local"
+            filterType="local"
+            totalItem={data?.length}
+            onPageChange={handlePageChange}
+            clearFilter={handleClearFilter}
+            onSearch={handleSearch}
+            filterdItem={filterdItems}
+          />
+          ;
         </>
       </BasePage>
     </>
   );
 };
 
-export default Login;
-
-// <BaseTable
-//   header={header}
-//   col={data}
-//   pagination={true}
-//   paginationType="local"
-//   filterType="local"
-//   totalItem={data?.length}
-//   onPageChange={handlePageChange}
-//   clearFilter={handleClearFilter}
-//   onSearch={handleSearch}
-//   filterdItem={filterdItems}
-// />;
+export default Tasks;

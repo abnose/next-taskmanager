@@ -8,8 +8,8 @@ const BasePage = ({ children }) => {
   return (
     <Box
       className={`${
-        !isOpen ? "w-[90%]  translate-x-[-53%]" : "w-[78%] translate-x-[-62%]"
-      } h-[95vh] shadow-md rounded-lg p-5 overflow-hidden absolute top-[50%] left-[50%] translate-y-[-50%]`}
+        !isOpen ? "w-[calc(100%-120px)]" : "w-[calc(100%-295px)]"
+      } h-[calc(100%-2vw)] shadow-md rounded-lg overflow-hidden fixed top-[1vw] left-[1vw]`}
       sx={{ backgroundColor: "rgb(240, 245, 255)" }}
     >
       {children}

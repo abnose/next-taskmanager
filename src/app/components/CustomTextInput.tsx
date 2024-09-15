@@ -9,6 +9,7 @@ const CustomTextInput = ({ control, name, errors, label }) => {
       render={({ field: { onChange, value } }) => (
         <div dir="rtl">
           <TextField
+            className="w-full"
             label={label}
             variant="outlined"
             value={value}

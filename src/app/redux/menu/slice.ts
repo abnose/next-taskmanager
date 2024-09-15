@@ -14,15 +14,19 @@ const initialState: counterSlice = {
 export const getRandomQuotesHandler = createAsyncThunk(
   "menu/getRandomQuotes",
   async () => {
-    let firstCall;
     try {
-      firstCall = await axios.get(
+      const response = await axios.get(
         `https://quotesondesign.com/wp-json/wp/v2/posts/?orderby=rand`
       );
+      // Only return the necessary data (serialized)
+      return {
+        writer: response.data[0].title.rendered,
+        description: response.data[0].content.rendered,
+      };
     } catch (err) {
-      console.log("faild to catch api");
+      console.log("Failed to fetch quotes", err);
+      throw err; // To handle error properly in the reducer if needed
     }
-    return firstCall;
   }
 );
 
@@ -37,19 +41,21 @@ export const menuSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getRandomQuotesHandler.pending, () => {
+      .addCase(getRandomQuotesHandler.pending, (state) => {
         console.log("pending");
       })
       .addCase(
         getRandomQuotesHandler.fulfilled,
         (state, action: PayloadAction<any>) => {
-          state.randomQuotes.writer = action.payload.data[0].title.rendered;
-          state.randomQuotes.description =
-            action.payload.data[0].content.rendered;
-          // console.log(action.payload.data[0].title.rendered, "done");
-          // console.log(state, "done");
+          // No need to access `action.payload.data`, just use the serialized data directly
+          state.randomQuotes.writer = action.payload.writer;
+          state.randomQuotes.description = action.payload.description;
+          console.log("Random quote fetched successfully");
         }
-      );
+      )
+      .addCase(getRandomQuotesHandler.rejected, (state, action) => {
+        console.error("Failed to fetch random quotes:", action.error.message);
+      });
   },
 });
 

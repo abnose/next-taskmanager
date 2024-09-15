@@ -13,6 +13,7 @@ import BaseNavbar from "./components/BaseNavbar";
 import { Box, Container } from "@mui/material";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
+
 const BYekan = localFont({
   src: "./assets/fonts/BYekan/BYekan.ttf",
   variable: "--BYekan",
@@ -36,16 +37,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Provider store={store}>
+      <body className={`${BYekan.variable}`}>
         <CacheProvider value={cacheRtl}>
-          <BaseNavbar />
-          <body className={`${BYekan.variable}`}>
-            <Box sx={{ bgcolor: "#cfe8fc", height: "100vh" }}>
+          <Provider store={store}>
+            <BaseNavbar />
+            <Box sx={{ bgcolor: "#cfe8fc", minHeight: "100vh" }}>
               <ThemeProvider theme={theme}>{children}</ThemeProvider>
             </Box>
-          </body>
+          </Provider>
         </CacheProvider>
-      </Provider>
+      </body>
     </html>
   );
 }
